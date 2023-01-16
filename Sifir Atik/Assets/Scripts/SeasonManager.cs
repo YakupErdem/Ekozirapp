@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Lean.Transition;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -30,6 +31,8 @@ public class SeasonManager : MonoBehaviour
 
     public void ChangeSeason(string season)
     {
+        FindObjectOfType<MainAnimator>().Animate();
+        FindObjectOfType<SeasonMenuManager>().Interact();
         Debug.Log("Season changed to " + season);
         switch (season)
         {
@@ -61,5 +64,16 @@ public class SeasonManager : MonoBehaviour
             }
             return s;
         }
+    }
+
+    public void ButtonAnimation(GameObject button) => StartCoroutine(ButtonAnimationTimer(button));
+    
+    IEnumerator ButtonAnimationTimer(GameObject b)
+    {
+        b.transform.localScaleTransition(new Vector3(.75f, .75f, .75f), .05f);
+        yield return new WaitForSeconds(.05f);
+        b.transform.localScaleTransition(new Vector3(1.1f, 1.1f, 1.1f), .05f);
+        yield return new WaitForSeconds(.05f);
+        b.transform.localScaleTransition(Vector3.one, .05f);
     }
 }

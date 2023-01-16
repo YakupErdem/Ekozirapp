@@ -41,6 +41,7 @@ public class ContentsManager : MonoBehaviour
     {
         foreach (var content in FindObjectsOfType<Content>())
         {
+            FindObjectOfType<ContentSearch>().contents.Clear();
             Destroy(content.gameObject);
         }
         foreach (var f in foods)     

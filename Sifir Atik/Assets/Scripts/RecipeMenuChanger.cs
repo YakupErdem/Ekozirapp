@@ -10,6 +10,7 @@ public class RecipeMenuChanger : MonoBehaviour
 
     public void ChangeMenu(int index)
     {
+        FindObjectOfType<RecipeMenuManager>().Interact();
         switch (index)
         {
             case 1:
